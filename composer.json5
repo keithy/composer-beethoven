@@ -1,0 +1,15 @@
+{
+// This is a comment
+
+    "name": "vendor/beethoven",
+    "description": "Use composer with a json5 master definition.",
+    "authors": [
+        {
+            "name": "keith",
+            "email": "keithy@consultant.com"
+        }
+    ],
+    "require": {
+        "colinodell/json5": "dev-master"
+    }
+}
