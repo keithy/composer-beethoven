@@ -10,11 +10,11 @@ Before running composer, beethoven compares the current `composer.json` to `comp
 If you have edited composer.json5 then composer.json will be automatically updated with the changes.
 
 Beethoven will not progagate automated changes to `composer.json` back into `composer.json5`
-Automatic updating will be suspended it `composer.json` is the more recent.
+Automatic updating will be suspended if `composer.json` is the more recent.
 
 `beethoven.sh update` invokes a manual update, using the `composer.json5` as the master definition.
 
-## Where's beethoven
+## Where's Beethoven?
 example output:
 ```
 "/Users/keith/NetBeansProjects/beethoven/beethoven.sh" "--ansi" "--no-interaction" "validate"
