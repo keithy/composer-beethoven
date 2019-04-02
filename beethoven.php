@@ -1,16 +1,21 @@
 #!/usr/bin/env php
 <?php
+
 DEFINE('MASTER', "composer.json");
-DEFINE('JSON5', "composer.json5");
+DEFINE('JSON5', "composer.5.json");
 DEFINE('NL', PHP_EOL);
 
 $action = $argv[1];
 
-require_once __DIR__ . "/vendor/autoload.php";
-
-function done($ret)
+function done($ret = 1)
 {
     exit($ret);
+}
+
+require_once __DIR__ . "/vendor/autoload.php";
+if (! function_exists('json5_decode')) {
+    echo "Beethoven is missing the json5_decode() function";
+    done(0);
 }
 
 if (!file_exists(MASTER)) {
@@ -25,11 +30,17 @@ if (!file_exists(JSON5)) {
     echo JSON5 . " - created for humans", NL;
     done(0);
 }
+$master = json_decode(file_get_contents(MASTER));
+try {
+    $json = json5_decode(file_get_contents(JSON5));
+} catch (JsonException $e) {
+   echo "Not valid json5 (". JSON5 . ")". NL;
+   exit(1);
+}
 
-$json = json5_decode(file_get_contents("composer.json5"));
-$master = json_decode(file_get_contents("composer.json"));
 
 if (json_encode($json) != json_encode($master)) {
+
     if (filemtime(MASTER) > filemtime(JSON5)) {
         echo MASTER . " is more recent than " . JSON5, NL;
         echo "Automatic updating of ". MASTER. " is suspended until they match", NL;
